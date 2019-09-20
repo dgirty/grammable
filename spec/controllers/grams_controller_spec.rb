@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe GramsController, type: :controller do
+  
   describe"gram#destroy action" do
     it "shouldn't allow users who didn't create the gram to delete it" do
       gram = FactoryBot.create(:gram)
@@ -107,7 +108,6 @@ RSpec.describe GramsController, type: :controller do
   describe "grams#show action" do
     it "should successfully show the page if a gram is found" do
       gram = FactoryBot.create(:gram)
-      sign_in gram.user
       get :show, params: { id: gram.id }
       expect(response).to have_http_status(:success)
     end
@@ -117,7 +117,6 @@ RSpec.describe GramsController, type: :controller do
       expect(response).to have_http_status(:not_found)
     end
   end
-
 
   describe "grams#index action" do
     it "should successfully show the page" do
